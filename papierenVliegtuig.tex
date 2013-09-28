@@ -1,0 +1,29 @@
+% based on http://michaelgoerz.net/blog/2009/07/printable-paper-with-latex-and-tikz/
+\documentclass[a4paper, 10pt]{article} % for A4 size paper
+\usepackage{tikz}
+\usepackage[a4paper]{geometry}
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+
+\tikzset{normal lines/.style={gray, very thin}} 
+\tikzset{margin lines/.style={gray, thick}} 
+\tikzset{mm lines/.style={gray, ultra thin}} 
+\tikzset{strong lines/.style={black, very thin}} 
+\tikzset{master lines/.style={black, very thick}} 
+\tikzset{dashed master lines/.style={loosely dashed, black, very thick}} 
+\node at (current page.south west){
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[style=dashed master lines] (0.5*\paperwidth,\paperheight)--(0.5*\paperwidth,0); %middenlijn
+    \draw[style=dashed master lines] (0.5*\paperwidth,\paperheight)--(\paperwidth,\paperheight-0.5*\paperwidth); %korte vleugel1
+    \draw[style=dashed master lines] (0.5*\paperwidth,\paperheight)--(0,\paperheight-0.5*\paperwidth); %korte vleuger2
+    \pgfmathparse{sqrt(2*(pow(0.5*\paperwidth, 2)))};
+    \draw[style=dashed master lines] (0.5*\paperwidth,\paperheight)--(0.5*\paperwidth,\paperheight-0.5*\pgfmathresult) ; %korte vleuger2
+\end{tikzpicture}
+};
+\end{tikzpicture}
+
+
+\end{document}
